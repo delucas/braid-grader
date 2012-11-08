@@ -46,4 +46,29 @@ class ScoreTests {
 		assert 5.0 == score.normalize().score
 	}
 	
+	@Test void thatCanNormalizeOverLocalTotal() {
+		def score = new Score(10, 10)
+		def normalizedScore = score.normalize(2.0)
+		
+		def expectedNormalizedScore = new Score(2.0, 2.0)
+		assert expectedNormalizedScore == normalizedScore
+	}
+	
+	@Test void thatCanBuildScoreByRatio() {
+		def score = new Score(0, 2)
+		def scoreByRatio = new Score(1, 2)
+		assert scoreByRatio == score.fromRatio(0.5)
+	}
+	
+	@Test(expected=ScoreException.class)
+	void thatRatioIsNotNegative() {
+		def score = new Score(0, 2)
+		score.fromRatio(-1.0)
+	}
+	
+	@Test(expected=ScoreException.class)
+	void thatRatioIsNotGreaterThanOne() {
+		def score = new Score(0, 2)
+		score.fromRatio(1.5)
+	}
 }

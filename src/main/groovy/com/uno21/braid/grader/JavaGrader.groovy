@@ -22,8 +22,9 @@ class JavaGrader {
 		def fallos = fields[1].split(':')[1].trim() as Integer
 		def errores = fields[2].split(':')[1].trim() as Integer
 	
+		def testsCorrectos = totalTests - (fallos + errores)
 		// Calculamos la nota de tests
-		return 10 * ((totalTests - (fallos + errores))/totalTests) as Double
+		return 10 * (testsCorrectos/totalTests) as Double
 	}
 	
 	def processCheckstyle(def myFile) {
@@ -130,8 +131,6 @@ class JavaGrader {
 			e.printStackTrace()
 			completeMapWithQualifications(correctionsMap, 0.0, 'Se ha enviado una tarea que no corresponde con la interfaz provista\nAsegúrese de no haberla cambiado desde el momento en que comenzó su tarea')
 		}
-	
-		sleep(20000)
 	
 		try {
 	
