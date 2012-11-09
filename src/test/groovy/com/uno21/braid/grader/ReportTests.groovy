@@ -14,29 +14,35 @@ class ReportTests {
 	}
 	
 	@Test void thatCanAddEntry() {
-		report.addEntry(new Score(1,2), 'some details')
+		report.addEntry('Test', new Score(1,2), 'some details')
 	}
 	
 	@Test void thatSummarizesScores() {
-		report.addEntry(new Score(1,2), 'details 1')
-		report.addEntry(new Score(1,2), 'details 2')
+		report.addEntry('Test', new Score(1,2), 'details 1')
+		report.addEntry('Test', new Score(1,2), 'details 2')
 		
 		assert new Score(2, 4) == report.totalScore
 	}
 	
 	@Test void thatSummarizesThreeScores() {
-		report.addEntry(new Score(1,2), 'details 1')
-		report.addEntry(new Score(1,2), 'details 2')
-		report.addEntry(new Score(1,2), 'details 3')
+		report.addEntry('Test', new Score(1,2), 'details 1')
+		report.addEntry('Test', new Score(1,2), 'details 2')
+		report.addEntry('Test', new Score(1,2), 'details 3')
 		
 		assert new Score(3, 6) == report.totalScore
 	}
 	
 	@Test void thatCanGetTestEntry() {
-		report.addEntry(new Score(1,2), 'details 1')
-		report.addEntry(new Score(1,2), 'details 2')
+		report.addEntry('Test', new Score(1,2), 'details 1')
+		report.addEntry('Test', new Score(1,2), 'details 2')
 		
-		assert new TestEntry(new Score(1,2), 'details 1') == report.entries.getAt(0)
+		assert new TestEntry('Test', new Score(1,2), 'details 1') == report.entries.getAt(0)
+	}
+	
+	@Test void thatATestEntryHasTitle() {
+		TestEntry entry = new TestEntry('Title', new Score(1,2), 'details 1')
+		
+		assert 'Title' == entry.title
 	}
 	
 }

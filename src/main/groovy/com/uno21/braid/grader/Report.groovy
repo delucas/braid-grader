@@ -7,8 +7,8 @@ class Report {
 
 	def entries = [] as List
 	
-	void addEntry(Score score, String detail) {
-		entries << new TestEntry(score, detail)
+	void addEntry(String title, Score score, String detail) {
+		entries << new TestEntry(title, score, detail)
 	}
 	
 	Score getTotalScore() {
