@@ -45,4 +45,40 @@ class ReportTests {
 		assert 'Title' == entry.title
 	}
 	
+	@Test void testThatAReportCanGivePerfectSummary() {
+		report.addEntry('Funcional', new Score(8.0,8.0), 'details 1')
+		report.addEntry('Estilo', new Score(2.0,2.0), 'details 2')
+		
+		assert 'Nota: 10.0 / 10.0\n\tNota Funcional: 8.0 / 8.0\n\tNota Estilo: 2.0 / 2.0' ==
+			report.summary
+	}
+	
+	@Test void testThatAReportCanGiveNonPerfectSummary() {
+		report.addEntry('Funcional', new Score(7.0,8.0), 'details 1')
+		report.addEntry('Estilo', new Score(1.0,2.0), 'details 2')
+		
+		assert 'Nota: 8.0 / 10.0\n\tNota Funcional: 7.0 / 8.0\n\tNota Estilo: 1.0 / 2.0' ==
+			report.summary
+	}
+	
+	@Test void testThatAReportCanGiveDetails() {
+		report.addEntry('Funcional', new Score(7.0,8.0), 'details 1')
+		report.addEntry('Estilo', new Score(1.0,2.0), 'details 2')
+		
+		def expectedDetails = '''===========================
+Detalles del Test Funcional
+===========================
+
+details 1
+
+========================
+Detalles del Test Estilo
+========================
+
+details 2
+'''
+		
+		assert expectedDetails == report.details
+	}
+	
 }
