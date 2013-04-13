@@ -10,7 +10,7 @@ import com.uno21.braid.grader.parsers.java.junit.JUnitParser
 
 class JavaGrader {
 	def completeMapWithQualifications(def map, def score, def detail) {
-		map.put('testScore', score)
+		map.put('testScore', score.score)
 		map.put('testDetail', detail)
 	}
 	
@@ -26,6 +26,8 @@ class JavaGrader {
 		def rutaGraderConfiable = "./grader-${json.nombreTarea}"
 	
 		def correctionsMap = [:]
+		correctionsMap << ['solutionId': json.solutionId]
+		
 		def nombreTemporalCarpeta = 'pull-' + new Date().time
 		def rutaTareaAlumno
 		
@@ -34,7 +36,7 @@ class JavaGrader {
 	
 		// No existía el repo, o hubo problemas con git
 		if (p.exitValue() == 1) {
-			completeMapWithQualifications(correctionsMap, 0.0, p.in.text)
+			completeMapWithQualifications(correctionsMap, new Score(0, 10), p.in.text)
 	
 			return jsonify(correctionsMap)
 		}
@@ -51,7 +53,7 @@ class JavaGrader {
 			
 		} catch (FileNotFoundException fe) {
 			// Se envió un repo no válido
-			completeMapWithQualifications(correctionsMap, 0.0, 'El repositorio suministrado no es válido')
+			completeMapWithQualifications(correctionsMap, new Score(0, 10), 'El repositorio suministrado no es válido')
 			return jsonify(correctionsMap)
 		}
 	
@@ -60,7 +62,7 @@ class JavaGrader {
 	
 		// No compila el código
 		if (p.exitValue() == 1) {
-			completeMapWithQualifications(correctionsMap, 0.0, p.in.text)
+			completeMapWithQualifications(correctionsMap, new Score(0, 10), p.in.text)
 	
 			return jsonify(correctionsMap)
 		}
@@ -109,7 +111,7 @@ class JavaGrader {
 	
 		} catch (FileNotFoundException e) {
 			e.printStackTrace()
-			completeMapWithQualifications(correctionsMap, 0.0, 'Se ha enviado una tarea que no corresponde con la interfaz provista\nAsegúrese de no haberla cambiado desde el momento en que comenzó su tarea')
+			completeMapWithQualifications(correctionsMap, new Score(0, 10), 'Se ha enviado una tarea que no corresponde con la interfaz provista\nAsegúrese de no haberla cambiado desde el momento en que comenzó su tarea')
 		}
 	
 		try {
