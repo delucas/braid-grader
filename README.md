@@ -1,5 +1,8 @@
 # Grader daemon
 
+[![Historias en Ready](https://badge.waffle.io/delucas/braid-grader.png?label=ready)](https://waffle.io/delucas/braid-grader)  
+[![Build Status](https://travis-ci.org/delucas/braid-grader.png?branch=master)](https://travis-ci.org/delucas/braid-grader)
+
 Un demonio hecho en **groovy** para recibir solicitudes de ejecución de corrección sobre un repositorio git, previamente diseñado el ambiente de test para el mismo.
 
 ## Funcionamiento
