@@ -4,7 +4,7 @@ Un demonio hecho en **groovy** para recibir solicitudes de ejecución de correcc
 
 ## Funcionamiento
 
-Un socket programado en Groovy que escucha en un puerto del servidor, y al recibir un JSON que matchea con el protocolo, ejecuta los pasos de la corrección correspondiente.
+Un demonio programado en Groovy que se acopla a una cola, y al recibir un JSON que matchea con el protocolo, ejecuta los pasos de la corrección correspondiente.
 
 ## Cómo colaborar
 
@@ -15,8 +15,3 @@ No necesitás hacer gran código para colaborar... simplemente aportando ideas, 
 
 * Agregar más herramientas de corrección, con la configuración correspondiente (Cobertura, PMD, CPD, Emma, etc.)
 * Soportar más lenguajes de programación (Roadmap sugerido: Groovy, Grails, C++, C, etc.)
-
-## Créditos (hasta el momento)
-
-* [Matías González](http://www.twitter.com/matitanio)
-* [Lucas Videla](http://www.twitter.com/luke_ar)
