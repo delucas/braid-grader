@@ -26,7 +26,8 @@ class Score {
 	}
 	
 	def normalize(Double localMax = 10.0) {
-		new Score((this.score / this.maxScore) * localMax, localMax)
+		Double score = (this.score / this.maxScore) * localMax as Double
+		new Score(score.trunc(2), localMax)
 	}
 	
 	def fromRatio(Double ratio) {
